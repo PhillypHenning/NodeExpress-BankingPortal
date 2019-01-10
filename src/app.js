@@ -22,4 +22,8 @@ app.get('/', (req, res) =>{
     res.render('index', {title: 'Account Summary', accounts});
 });
 
+app.get('/savings', (req, res) => {
+    res.render('account', {account: accounts.savings});
+});
+
 app.listen(3000, () => console.log('Project running on port 3000...'));
