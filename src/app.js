@@ -32,4 +32,32 @@ app.get('/profile', (req, res) =>{ res.render('profile', { user: users[0] }); })
 
 app.get('/transfer', (req, res) => { res.render('transfer'); });
 
+app.get('/payment', (req, res) => { res.render('payment', { account: accounts.credit }); });
+
+app.post('/transfer', (req, res) => {
+    util.log(req.body);
+
+    var fa = req.body.from;
+    var ta = req.body.to;
+
+    // Now get the users account balances of the same name
+    util.log('Switching [ ' + req.body.amount + ' ] credits between: [ ' + fa + ' ] and [ ' + ta + ' ]');
+    accounts[fa].balance = parseInt(accounts[fa].balance - req.body.amount, 10);
+    accounts[ta].balance = parseInt(accounts[ta].balance + req.body.amount, 10);
+
+    var accountsJSON = JSON.stringify(accounts);
+
+    fs.writeFileSync(path.join(__dirname, 'json/accounts.json'), accountsJSON, 'utf8');
+    res.render('transfer', { message: 'Transfer completed!' });
+});
+
+app.post('/payment', (req, res) => {
+    accounts['credit'].balance = parseInt(accounts['credit'].balance - req.body.amount, 10);
+
+    var accountsJSON = JSON.stringify(accounts);
+
+    fs.writeFileSync(path.join(__dirname, '/json/accounts.json'), accountsJSON, 'utf8');
+    res.render('payment', { message: 'Payment successful!', account: accounts['credit'] });
+});
+
 app.listen(3000, () => util.log('Project running on port 3000...'));
