@@ -58,7 +58,7 @@ app.post('/payment', (req, res) => {
     var accountsJSON = JSON.stringify(accounts);
 
     fs.writeFileSync(path.join(__dirname, '/json/accounts.json'), accountsJSON, 'utf8');
-    res.render('payment', { message: 'Payment successful!', account: accounts['credit'] });
+    res.render('payment', { message: 'Payment successful!', account: accounts.credit });
 });
 
 app.listen(3000, () => util.log('Project running on port 3000...'));
