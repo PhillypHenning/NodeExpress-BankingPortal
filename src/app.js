@@ -19,7 +19,7 @@ const users = JSON.parse(userData);
 
 // =+Routes+=
 app.get('/', (req, res) =>{
-    res.render('index', {title: 'Account Summary', accounts: accounts});
+    res.render('index', {title: 'Account Summary', accounts});
 });
 
 app.listen(3000, () => console.log('Project running on port 3000...'));
