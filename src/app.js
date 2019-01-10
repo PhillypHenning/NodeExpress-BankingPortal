@@ -26,4 +26,12 @@ app.get('/savings', (req, res) => {
     res.render('account', {account: accounts.savings});
 });
 
+app.get('/checking', (req, res) => {
+    res.render('account', {account: accounts.checking});
+});
+
+app.get('/credit', (req, res) => {
+    res.render('account', {account: accounts.credit});
+});
+
 app.listen(3000, () => console.log('Project running on port 3000...'));
