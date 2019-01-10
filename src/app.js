@@ -53,6 +53,7 @@ app.post('/transfer', (req, res) => {
 
 app.post('/payment', (req, res) => {
     accounts['credit'].balance = parseInt(accounts['credit'].balance - req.body.amount, 10);
+    accounts['credit'].available = parseInt(accounts['credit'].available + req.body.amount, 10);
 
     var accountsJSON = JSON.stringify(accounts);
 
